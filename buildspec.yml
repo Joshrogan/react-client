@@ -5,15 +5,20 @@ phases:
     runtime-versions:
       nodejs: 12.x
     commands:
-      - echo Installing npm packages
-      - npm install
-      - npm update
+      - echo Installing yarn
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt install --no-install-recommends yarn
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - yarn
   build:
     commands:
       - echo Testing...
       - yarn test
       - echo Building react app..
-      - npm run build
+      - yarn build
       - echo Built react app on `date`
 
 artifacts:
