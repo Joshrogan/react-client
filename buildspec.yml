@@ -10,7 +10,9 @@ phases:
       - npm update
   build:
     commands:
-      - echo Building react app
+      - echo Testing...
+      - yarn test
+      - echo Building react app..
       - npm run build
       - echo Built react app on `date`
 
